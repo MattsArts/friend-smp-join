@@ -7,7 +7,7 @@
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 50px;
     }
     h1 {
       font-size: 40px;
@@ -15,43 +15,60 @@
     }
     p {
       font-size: 18px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
-    button {
+    .btn {
       font-size: 20px;
       padding: 15px 40px;
-      margin: 20px;
+      margin: 15px;
       cursor: pointer;
       border: none;
       border-radius: 10px;
       background-color: #4CAF50;
       color: white;
     }
-    button:hover {
+    .btn:hover {
       background-color: #45a049;
+    }
+    .fallback {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #555;
+    }
+    code {
+      background-color: #ddd;
+      padding: 2px 6px;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
 
   <h1>Join Friend SMP</h1>
-  <p>Click your edition to automatically add the server to Minecraft!</p>
+  <p>Click your edition to try adding the server to Minecraft automatically:</p>
 
   <!-- Java Edition Button -->
-  <a href="minecraft://?addExternalServer=Friend SMP|included-realty.gl.joinmc.link:25585">
-    <button>Join (Java Edition)</button>
-  </a>
-
-  <br>
+  <button class="btn" onclick="tryMinecraft('included-realty.gl.joinmc.link', '25585')">Join (Java Edition)</button>
 
   <!-- Bedrock Edition Button -->
-  <a href="minecraft://?addExternalServer=Friend SMP|structure-targets.gl.at.ply.gg:34761">
-    <button>Join (Bedrock Edition)</button>
-  </a>
+  <button class="btn" onclick="tryMinecraft('structure-targets.gl.at.ply.gg', '34761')">Join (Bedrock Edition)</button>
 
-  <p style="margin-top: 50px; font-size: 14px; color: #555;">
-    Note: On some devices, you may need to confirm "Open Application" when Minecraft launches.
-  </p>
+  <div class="fallback">
+    <p>If clicking the buttons doesn’t work, use these IPs manually:</p>
+    <p>Java IP: <code>included-realty.gl.joinmc.link:25585</code></p>
+    <p>Bedrock IP: <code>structure-targets.gl.at.ply.gg:34761</code></p>
+  </div>
+
+  <script>
+    function tryMinecraft(ip, port) {
+      // Try Java/Bedrock protocol
+      window.location.href = `minecraft://?addExternalServer=Friend SMP|${ip}:${port}`;
+      // Alert for feedback
+      setTimeout(() => {
+        alert("If Minecraft didn't open, copy the IP from below and add it manually.");
+      }, 500);
+    }
+  </script>
 
 </body>
 </html>
